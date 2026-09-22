@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전유승 | Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    background: #08090c;
+    color: #f5f5f5;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: #5b5bf7;
+    filter: blur(150px);
+    opacity: 0.18;
+    top: -150px;
+    left: -150px;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    background: #00c9a7;
+    filter: blur(160px);
+    opacity: 0.12;
+    bottom: -150px;
+    right: -100px;
+    z-index: -1;
+}
+
+nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(900px, calc(100% - 30px));
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(20, 21, 27, 0.75);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 13px;
+    border-radius: 20px;
+    transition: 0.25s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: white;
+    background: rgba(255,255,255,0.1);
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 80px;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    border-radius: 30px;
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 9vw, 100px);
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -5px;
+    margin-bottom: 25px;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #ffffff, #8b8bff, #65e6ce);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #999;
+    font-size: 18px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.scroll-button {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 13px 22px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    transition: 0.25s;
+}
+
+.scroll-button:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.12);
+}
+
+.container {
+    width: min(1050px, calc(100% - 40px));
+    margin: auto;
+}
+
+section {
+    padding: 110px 0;
+}
+
+.section-label {
+    color: #7d7dff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: -2px;
+    margin-bottom: 45px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.card {
+    padding: 30px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.09);
+    backdrop-filter: blur(15px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.07);
+}
+
+.card-number {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #999;
+}
+
+.profile-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.profile-card .card:first-child {
+    background: linear-gradient(
+        135deg,
+        rgba(91,91,247,0.18),
+        rgba(255,255,255,0.04)
+    );
+}
+
+.project-card {
+    min-height: 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::after {
+    content: "PROJECT";
+    position: absolute;
+    right: -20px;
+    bottom: -25px;
+    font-size: 70px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.025);
+}
+
+.project-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background: rgba(125,125,255,0.12);
+    color: #9999ff;
+    margin-bottom: 20px;
+}
+
+.preparing {
+    color: #777 !important;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.pdf-card {
+    grid-column: 1 / -1;
+}
+
+.pdf-viewer {
+    margin-top: 20px;
+    width: 100%;
+    height: 600px;
+    overflow: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: #111217;
+}
+
+.pdf-viewer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 40px 20px;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.7s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+    nav {
+        top: 10px;
+        padding: 10px 14px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+        padding: 7px 8px;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    section {
+        padding: 80px 0;
+    }
+
+    .grid,
+    .profile-card {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 24px;
+    }
+
+    .section-title {
+        margin-bottom: 30px;
+    }
+
+    .pdf-viewer {
+        height: 500px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">JEON YU SEUNG</div>
+
+    <div class="nav-links">
+        <a href="#home">HOME</a>
+        <a href="#basic">소개</a>
+        <a href="#career">진로</a>
+        <a href="#skills">활동</a>
+        <a href="#project">프로젝트</a>
+    </div>
+</nav>
+
+<section class="hero" id="home">
+    <div class="hero-content reveal">
+
+        <div class="badge">
+            STUDENT PORTFOLIO · 2026
+        </div>
+
+        <h1>
+            <span class="gradient-text">전유승</span><br>
+            PORTFOLIO
+        </h1>
+
+        <p>
+            정보보호를 공부하며 다양한 활동과 프로젝트를
+            경험하고 있는 전유승의 포트폴리오입니다.
+        </p>
+
+        <a href="#basic" class="scroll-button">
+            포트폴리오 보기 ↓
+        </a>
+
+    </div>
+</section>
+
+<main class="container">
+
+<section id="basic">
+
+    <div class="section-label">
+        02 · BASIC
+    </div>
+
+    <h2 class="section-title">
+        기본적 사항
+    </h2>
+
+    <div class="profile-card">
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                나의 소개
+            </h3>
+
+            <p>
+                이름 : 전유승<br>
+                생년월일 : 2010년 1월 28일<br>
+                소속 : 선린인터넷고등학교<br>
+                학습 분야 : 정보보호
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <h3>
+                나의 강점
+            </h3>
+
+            <p>
+                <strong>집중력</strong><br>
+                무슨 일을 할 때 끝까지 집중해서 하는 태도
+                <br><br>
+
+                <strong>궁금증</strong><br>
+                이해가 안 되거나 그런 문제가 생기면 포기보단 더 찾아본다.
+                <br><br>
+
+                <strong>활용</strong><br>
+                기본 문제만 하지 않고 한 단계 더 큰 응용도 도전한다.
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                흥미 · 가치관
+            </h3>
+
+            <p>
+                시스템 해킹과 백엔드에 관심이 있습니다.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="career">
+
+    <div class="section-label">
+        03 · CAREER
+    </div>
+
+    <h2 class="section-title">
+        진로활동
+    </h2>
+
+    <div class="grid">
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                관심 분야
+            </h3>
+
+            <p>
+                시스템 해킹<br>
+                정보보안
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <h3>
+                관심 직업 · 학과
+            </h3>
+
+            <p>
+                정보보안 관련 직업
+            </p>
+
+        </div>
+
+
+        <div class="card reveal pdf-card">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                진로 활동 학습지
+            </h3>
+
+            <p>
+                정보보안과 시스템 해킹 분야에
+                관심을 가지고 진로를 탐색하고 있습니다.
+            </p>
+
+            <div class="pdf-viewer">
+
+                <iframe
+                    src="jeon_jinro.pdf"
+                    title="진로 활동 학습지">
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="skills">
+
+    <div class="section-label">
+        04 · SKILLS
+    </div>
+
+    <h2 class="section-title">
+        주요 활동 및 스킬
+    </h2>
+
+    <div class="grid">
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                교과 활동
+            </h3>
+
+            <p>
+                기초상식 퀴즈를 코딩을 해서 만들어봤다.
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <h3>
+                동아리 활동 · 진로 활동 등
+            </h3>
+
+            <p>
+                동아리에서 코딩을 배우고 코딩으로 로봇도
+                움직여보고 여러 프로그램도 만들어봤다.
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                사용 프로그램 숙련도
+            </h3>
+
+            <p>
+                C언어를 잘은 못하지만 그래도 열심히 하는 중이다.
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="card-number">
+                04
+            </div>
+
+            <h3>
+                기타 자격 · 외국어 · 자격증 등 능력
+            </h3>
+
+            <p>
+                파워포인트<br>
+                한글<br>
+                한자 8급
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="project">
+
+    <div class="section-label">
+        05 · PROJECT
+    </div>
+
+    <h2 class="section-title">
+        프로젝트
+    </h2>
+
+    <div class="grid">
+
+        <div class="card project-card reveal">
+
+            <span class="project-tag">
+                READING
+            </span>
+
+            <h3>
+                독서 · 주제탐구보고서
+            </h3>
+
+            <p>
+                아직은 준비 중입니다.
+            </p>
+
+            <p class="preparing">
+                PROJECT · PREPARING
+            </p>
+
+        </div>
+
+
+        <div class="card project-card reveal">
+
+            <span class="project-tag">
+                SCHOOL
+            </span>
+
+            <h3>
+                교과 프로젝트 작품 · 결과물
+            </h3>
+
+            <p>
+                아직은 준비 중입니다.
+            </p>
+
+            <p class="preparing">
+                PROJECT · PREPARING
+            </p>
+
+        </div>
+
+
+        <div class="card project-card reveal">
+
+            <span class="project-tag">
+                PERSONAL
+            </span>
+
+            <h3>
+                개인 프로젝트 작품 · 결과물
+            </h3>
+
+            <p>
+                아직은 준비 중입니다.
+            </p>
+
+            <p class="preparing">
+                PROJECT · PREPARING
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+    <p>
+        JEON YU SEUNG · PORTFOLIO · 2026
+    </p>
+</footer>
+
+
+<script>
+
+const reveals = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+
+    });
+
+}, {
+    threshold: 0.12
+});
+
+
+reveals.forEach(element => {
+    observer.observe(element);
+});
+
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+
+window.addEventListener('scroll', () => {
+
+    let current = '';
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 150;
+
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+        }
+
+    });
+
+
+    navLinks.forEach(link => {
+
+        link.classList.remove('active');
+
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
